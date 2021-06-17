@@ -2,15 +2,13 @@
 
 namespace CentroClinico.Domain.Entities
 {
-  public class Employee
+  public class Customer
   {
     public Guid ID { get; set; } = Guid.NewGuid();
-    public string CPF { get; set; }
-    public string CEP { get; set; }
-    public string HouseNumber { get; set; }
-    public string AdditionalInfo { get; set; }
+    public string InsuranceCardNumber { get; set; }
+    public string InsuranceCompany { get; set; }
+    public string InsurancePlan { get; set; }
     public Guid UserID { get; set; }
     public User User { get; set; }
   }
 }
-
