@@ -8,7 +8,7 @@ namespace CentroClinico.Infra.Data.EF.Configurations
   {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
-      builder.ToTable("employeies");
+      builder.ToTable("employees");
       builder.HasKey(x => x.ID);
 
       builder.Property(x => x.ID)
