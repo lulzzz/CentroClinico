@@ -121,18 +121,11 @@ namespace CentroClinico.Infra.Data.Migrations
                     CPF = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserID = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    SpecialtyID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     UnityID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Doctors_Specialties_SpecialtyID",
-                        column: x => x.SpecialtyID,
-                        principalTable: "Specialties",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Doctors_Unities_UnityID",
                         column: x => x.UnityID,
@@ -282,11 +275,6 @@ namespace CentroClinico.Infra.Data.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Doctors_SpecialtyID",
-                table: "Doctors",
-                column: "SpecialtyID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Doctors_UnityID",
                 table: "Doctors",
                 column: "UnityID");
@@ -348,10 +336,10 @@ namespace CentroClinico.Infra.Data.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "Specialties");
 
             migrationBuilder.DropTable(
-                name: "Specialties");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Unities");

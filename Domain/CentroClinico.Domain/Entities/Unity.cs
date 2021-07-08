@@ -10,7 +10,8 @@ namespace CentroClinico.Domain.Entities
     public string HouseNumber { get; set; }
     public string AdditionalInfo { get; set; }
     public string City { get; set; }
-    public List<Doctor> Doctors { get; set; }
     public List<Room> Rooms { get; set; }
+    public List<Appointment> Appointments { get; set; }
+    public List<DoctorUnity> Doctors{ get; set; }
   }
 }

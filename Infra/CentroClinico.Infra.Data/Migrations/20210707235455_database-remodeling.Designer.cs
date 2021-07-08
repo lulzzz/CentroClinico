@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CentroClinico.Infra.Data.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20210617150845_starter")]
-    partial class starter
+    [Migration("20210707235455_database-remodeling")]
+    partial class databaseremodeling
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,19 +23,24 @@ namespace CentroClinico.Infra.Data.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("appointment_id");
 
                     b.Property<Guid>("CustomerID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("customer_id");
 
                     b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("date_time");
 
                     b.Property<Guid>("DoctorID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("doctor_id");
 
                     b.Property<Guid>("UnityID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("unity_id");
 
                     b.HasKey("ID");
 
@@ -45,219 +50,267 @@ namespace CentroClinico.Infra.Data.Migrations
 
                     b.HasIndex("UnityID");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("appointments");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Customer", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("custumer_id");
 
                     b.Property<string>("InsuranceCardNumber")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(16)
+                        .HasColumnType("varchar(16)")
+                        .HasColumnName("insurance_card_number");
 
                     b.Property<string>("InsuranceCompany")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("insurance_company");
 
                     b.Property<string>("InsurancePlan")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("insurance_plan");
 
                     b.Property<Guid>("UserID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("user_id");
 
                     b.HasKey("ID");
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Customers");
+                    b.ToTable("custumers");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Doctor", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("doctor_id");
 
                     b.Property<string>("CPF")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)")
+                        .HasColumnName("cpf");
 
                     b.Property<string>("CRM")
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid?>("SpecialtyID")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("UnityID")
-                        .HasColumnType("char(36)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("crm");
 
                     b.Property<Guid>("UserID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("user_id");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("SpecialtyID");
-
-                    b.HasIndex("UnityID");
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("doctors");
                 });
 
-            modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorSpecialty", b =>
+            modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorSpeciality", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
                     b.Property<Guid>("DoctorID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("doctor_id");
 
-                    b.Property<Guid>("SpecialtyID")
-                        .HasColumnType("char(36)");
+                    b.Property<Guid>("SpecialityID")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("speciality_id");
 
-                    b.HasKey("ID");
+                    b.HasKey("DoctorID", "SpecialityID");
 
-                    b.HasIndex("DoctorID");
+                    b.HasIndex("SpecialityID");
 
-                    b.HasIndex("SpecialtyID");
-
-                    b.ToTable("DoctorSpecialties");
+                    b.ToTable("doctor_speciality");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorUnity", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<Guid>("UnityID")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("unity_id");
 
                     b.Property<Guid>("DoctorID")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("doctor_id");
+
+                    b.Property<Guid>("ID")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("UnityID")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("ID");
+                    b.HasKey("UnityID", "DoctorID");
 
                     b.HasIndex("DoctorID");
 
-                    b.HasIndex("UnityID");
-
-                    b.ToTable("DoctorUnities");
+                    b.ToTable("doctor_unity");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Employee", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("employee_id");
 
                     b.Property<string>("AdditionalInfo")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("additional_info");
 
                     b.Property<string>("CEP")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("varchar(8)")
+                        .HasColumnName("cep");
 
                     b.Property<string>("CPF")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)")
+                        .HasColumnName("cpf");
 
                     b.Property<string>("HouseNumber")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("house_number");
 
                     b.Property<Guid>("UserID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("user_id");
 
                     b.HasKey("ID");
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Employeies");
+                    b.ToTable("employeies");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Room", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("room_id");
 
                     b.Property<int>("Floor")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("floor");
 
                     b.Property<int>("Number")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("number");
 
                     b.Property<Guid>("UnityID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("unity_id");
 
                     b.HasKey("ID");
 
                     b.HasIndex("UnityID");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("rooms");
                 });
 
-            modelBuilder.Entity("CentroClinico.Domain.Entities.Specialty", b =>
+            modelBuilder.Entity("CentroClinico.Domain.Entities.Speciality", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("speciality_id");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("name");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Specialties");
+                    b.ToTable("specialties");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Unity", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("unity_id");
 
                     b.Property<string>("AdditionalInfo")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("additional_info");
 
                     b.Property<string>("CEP")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("varchar(8)")
+                        .HasColumnName("cep");
 
                     b.Property<string>("City")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("city");
 
                     b.Property<string>("HouseNumber")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)")
+                        .HasColumnName("house_number");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Unities");
+                    b.ToTable("unities");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("user_id");
 
                     b.Property<string>("Email")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("email");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Password")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("password");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar(12)")
+                        .HasColumnName("phone");
 
                     b.Property<int>("Profile")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("profile");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Appointment", b =>
@@ -275,7 +328,7 @@ namespace CentroClinico.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CentroClinico.Domain.Entities.Unity", "Unity")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("UnityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -300,14 +353,6 @@ namespace CentroClinico.Infra.Data.Migrations
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Doctor", b =>
                 {
-                    b.HasOne("CentroClinico.Domain.Entities.Specialty", null)
-                        .WithMany("Doctors")
-                        .HasForeignKey("SpecialtyID");
-
-                    b.HasOne("CentroClinico.Domain.Entities.Unity", null)
-                        .WithMany("Doctors")
-                        .HasForeignKey("UnityID");
-
                     b.HasOne("CentroClinico.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
@@ -317,35 +362,35 @@ namespace CentroClinico.Infra.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorSpecialty", b =>
+            modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorSpeciality", b =>
                 {
-                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
-                        .WithMany("Specialties")
+                    b.HasOne("CentroClinico.Domain.Entities.Speciality", "Speciality")
+                        .WithMany("Doctors")
                         .HasForeignKey("DoctorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CentroClinico.Domain.Entities.Specialty", "Specialty")
-                        .WithMany()
-                        .HasForeignKey("SpecialtyID")
+                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("Specialties")
+                        .HasForeignKey("SpecialityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Specialty");
+                    b.Navigation("Speciality");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorUnity", b =>
                 {
-                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
-                        .WithMany("Unities")
+                    b.HasOne("CentroClinico.Domain.Entities.Unity", "Unity")
+                        .WithMany("Doctors")
                         .HasForeignKey("DoctorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CentroClinico.Domain.Entities.Unity", "Unity")
-                        .WithMany()
+                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("Unities")
                         .HasForeignKey("UnityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -384,13 +429,15 @@ namespace CentroClinico.Infra.Data.Migrations
                     b.Navigation("Unities");
                 });
 
-            modelBuilder.Entity("CentroClinico.Domain.Entities.Specialty", b =>
+            modelBuilder.Entity("CentroClinico.Domain.Entities.Speciality", b =>
                 {
                     b.Navigation("Doctors");
                 });
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Unity", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("Doctors");
 
                     b.Navigation("Rooms");

@@ -9,7 +9,7 @@ namespace CentroClinico.Domain.Entities
     public string CRM { get; set; }
     public string CPF { get; set; }
     public List<DoctorUnity> Unities { get; set; }
-    public List<DoctorSpecialty> Specialties { get; set; }
+    public List<DoctorSpeciality> Specialties { get; set; }
     public Guid UserID { get; set; }
     public User User { get; set; }
   }
