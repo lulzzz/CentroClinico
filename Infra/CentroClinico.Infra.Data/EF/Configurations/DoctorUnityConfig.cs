@@ -19,8 +19,8 @@ namespace CentroClinico.Infra.Data.EF.Configurations
         .HasColumnName("unity_id")
         .IsRequired();
 
-      builder.HasOne(x => x.Doctor).WithMany(x => x.Unities).HasForeignKey(x => x.UnityID);
-      builder.HasOne(x => x.Unity).WithMany(x => x.Doctors).HasForeignKey(x => x.DoctorID);
+      builder.HasOne(x => x.Doctor).WithMany(x => x.Unities).HasForeignKey(x => x.DoctorID);
+      builder.HasOne(x => x.Unity).WithMany(x => x.Doctors).HasForeignKey(x => x.UnityID);
     }
   }
 }

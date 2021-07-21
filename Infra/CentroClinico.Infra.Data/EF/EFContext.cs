@@ -12,7 +12,7 @@ namespace CentroClinico.Infra.Data.EF
     {
       if (!optionsBuilder.IsConfigured)
       {
-        string mySQLConnectionStr = "Server=127.0.0.1;Port=3306;Database=CentroClinico;Uid=root;Pwd=root";
+        string mySQLConnectionStr = "Server=banco_mysql;Port=3306;Database=centro_clinico;Uid=root;Pwd=X369408";
         optionsBuilder.UseMySql(mySQLConnectionStr, ServerVersion.AutoDetect(mySQLConnectionStr));
       }
     }

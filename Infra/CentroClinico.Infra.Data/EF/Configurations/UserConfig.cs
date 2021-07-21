@@ -38,6 +38,10 @@ namespace CentroClinico.Infra.Data.EF.Configurations
       builder.Property(x => x.Profile)
         .HasColumnName("profile")
         .IsRequired();
+
+      builder.Property(x => x.Active)
+        .HasColumnName("active")
+        .IsRequired();
     }
   }
 }

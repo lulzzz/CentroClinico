@@ -1,4 +1,5 @@
 using CentroClinico.Infra.Data.EF;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,10 @@ namespace CentroClinico.UI.MVC
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      
+      services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(options => options.LoginPath = "/Home/Login");
+
       services.AddDbContext<EFContext>();
     }
 
@@ -46,6 +51,8 @@ namespace CentroClinico.UI.MVC
 
       app.UseRouting();
 
+      app.UseCookiePolicy();
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>

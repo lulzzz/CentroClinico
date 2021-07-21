@@ -278,6 +278,10 @@ namespace CentroClinico.Infra.Data.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("user_id");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("active");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -362,14 +366,14 @@ namespace CentroClinico.Infra.Data.Migrations
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorSpeciality", b =>
                 {
-                    b.HasOne("CentroClinico.Domain.Entities.Speciality", "Speciality")
-                        .WithMany("Doctors")
+                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("Specialties")
                         .HasForeignKey("DoctorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
-                        .WithMany("Specialties")
+                    b.HasOne("CentroClinico.Domain.Entities.Speciality", "Speciality")
+                        .WithMany("Doctors")
                         .HasForeignKey("SpecialityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -381,14 +385,14 @@ namespace CentroClinico.Infra.Data.Migrations
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.DoctorUnity", b =>
                 {
-                    b.HasOne("CentroClinico.Domain.Entities.Unity", "Unity")
-                        .WithMany("Doctors")
+                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("Unities")
                         .HasForeignKey("DoctorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CentroClinico.Domain.Entities.Doctor", "Doctor")
-                        .WithMany("Unities")
+                    b.HasOne("CentroClinico.Domain.Entities.Unity", "Unity")
+                        .WithMany("Doctors")
                         .HasForeignKey("UnityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

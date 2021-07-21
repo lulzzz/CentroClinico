@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CentroClinico.Domain.Entities;
 using CentroClinico.Infra.Data.EF;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CentroClinico.UI.MVC.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly EFContext _context;

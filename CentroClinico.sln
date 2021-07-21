@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{8FF189
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{D84CC868-B31C-4908-A01D-7C10A59E93E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentroClinico.UI.MVC", "UI\CentroClinico.UI.MVC\CentroClinico.UI.MVC.csproj", "{C75C3353-D33B-4689-A565-672433ACCD22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentroClinico.UI.MVC", "UI\CentroClinico.UI.MVC\CentroClinico.UI.MVC.csproj", "{C75C3353-D33B-4689-A565-672433ACCD22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentroClinico.Domain", "Domain\CentroClinico.Domain\CentroClinico.Domain.csproj", "{A6255856-7A1A-4650-AA52-FD34C347A21C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentroClinico.Domain", "Domain\CentroClinico.Domain\CentroClinico.Domain.csproj", "{A6255856-7A1A-4650-AA52-FD34C347A21C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentroClinico.Infra.Data", "Infra\CentroClinico.Infra.Data\CentroClinico.Infra.Data.csproj", "{193F1FD5-F9C3-4BAE-8806-61B979185131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentroClinico.Infra.Data", "Infra\CentroClinico.Infra.Data\CentroClinico.Infra.Data.csproj", "{193F1FD5-F9C3-4BAE-8806-61B979185131}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D9396F58-F32F-465A-BB7F-B46284315288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{193F1FD5-F9C3-4BAE-8806-61B979185131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{193F1FD5-F9C3-4BAE-8806-61B979185131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{193F1FD5-F9C3-4BAE-8806-61B979185131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9396F58-F32F-465A-BB7F-B46284315288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9396F58-F32F-465A-BB7F-B46284315288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9396F58-F32F-465A-BB7F-B46284315288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9396F58-F32F-465A-BB7F-B46284315288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

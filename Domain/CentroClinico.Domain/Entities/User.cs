@@ -11,6 +11,7 @@ namespace CentroClinico.Domain.Entities
     public string Password { get; set; }
     public string Phone { get; set; }
     public EnumProfile Profile { get; set; }
+    public bool Active { get; set; } = true;
   }
 }
 

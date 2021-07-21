@@ -20,8 +20,8 @@ namespace CentroClinico.Infra.Data.EF.Configurations
         .HasColumnName("speciality_id")
         .IsRequired();
 
-      builder.HasOne(x => x.Doctor).WithMany(x => x.Specialties).HasForeignKey(x => x.SpecialityID);
-      builder.HasOne(x => x.Speciality).WithMany(x => x.Doctors).HasForeignKey(x => x.DoctorID);
+      builder.HasOne(x => x.Doctor).WithMany(x => x.Specialties).HasForeignKey(x => x.DoctorID);
+      builder.HasOne(x => x.Speciality).WithMany(x => x.Doctors).HasForeignKey(x => x.SpecialityID);
 
     }
   }
