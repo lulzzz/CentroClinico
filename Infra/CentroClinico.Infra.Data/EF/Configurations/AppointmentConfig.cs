@@ -28,9 +28,19 @@ namespace CentroClinico.Infra.Data.EF.Configurations
       builder.Property(x => x.CustomerID)
         .HasColumnName("customer_id");
 
+      builder.Property(x => x.SpecialityID)
+        .HasColumnName("speciality_id");
+
+      builder.Property(x => x.Private)
+        .HasColumnName("private");
+
       builder.HasOne(x => x.Unity)
         .WithMany(x => x.Appointments)
         .HasForeignKey(x => x.UnityID);
+
+      builder.HasOne(x => x.Speciality)
+        .WithMany(x => x.Appointments)
+        .HasForeignKey(x => x.SpecialityID);
 
     }
     

@@ -42,6 +42,10 @@ namespace CentroClinico.Infra.Data.EF.Configurations
       builder.Property(x => x.Active)
         .HasColumnName("active")
         .IsRequired();
+
+      builder.Property(x => x.BirthDay)
+        .HasColumnName("birth_day")
+        .IsRequired();
     }
   }
 }

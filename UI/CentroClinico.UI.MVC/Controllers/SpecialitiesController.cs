@@ -22,7 +22,7 @@ namespace CentroClinico.UI.MVC.Controllers
         // GET: Specialities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Specialties.ToListAsync());
+            return View(await _context.Specialities.ToListAsync());
         }
 
         // GET: Specialities/Details/5
@@ -33,7 +33,7 @@ namespace CentroClinico.UI.MVC.Controllers
                 return NotFound();
             }
 
-            var speciality = await _context.Specialties
+            var speciality = await _context.Specialities
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (speciality == null)
             {
@@ -74,7 +74,7 @@ namespace CentroClinico.UI.MVC.Controllers
                 return NotFound();
             }
 
-            var speciality = await _context.Specialties.FindAsync(id);
+            var speciality = await _context.Specialities.FindAsync(id);
             if (speciality == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace CentroClinico.UI.MVC.Controllers
                 return NotFound();
             }
 
-            var speciality = await _context.Specialties
+            var speciality = await _context.Specialities
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (speciality == null)
             {
@@ -140,15 +140,15 @@ namespace CentroClinico.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var speciality = await _context.Specialties.FindAsync(id);
-            _context.Specialties.Remove(speciality);
+            var speciality = await _context.Specialities.FindAsync(id);
+            _context.Specialities.Remove(speciality);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SpecialityExists(Guid id)
         {
-            return _context.Specialties.Any(e => e.ID == id);
+            return _context.Specialities.Any(e => e.ID == id);
         }
     }
 }

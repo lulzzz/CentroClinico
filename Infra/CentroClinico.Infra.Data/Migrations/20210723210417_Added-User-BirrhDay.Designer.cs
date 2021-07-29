@@ -3,14 +3,16 @@ using System;
 using CentroClinico.Infra.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CentroClinico.Infra.Data.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20210723210417_Added-User-BirrhDay")]
+    partial class AddedUserBirrhDay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,14 +38,6 @@ namespace CentroClinico.Infra.Data.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("doctor_id");
 
-                    b.Property<bool>("Private")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("private");
-
-                    b.Property<Guid>("SpecialityID")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("speciality_id");
-
                     b.Property<Guid>("UnityID")
                         .HasColumnType("char(36)")
                         .HasColumnName("unity_id");
@@ -53,8 +47,6 @@ namespace CentroClinico.Infra.Data.Migrations
                     b.HasIndex("CustomerID");
 
                     b.HasIndex("DoctorID");
-
-                    b.HasIndex("SpecialityID");
 
                     b.HasIndex("UnityID");
 
@@ -150,6 +142,9 @@ namespace CentroClinico.Infra.Data.Migrations
                     b.Property<Guid>("DoctorID")
                         .HasColumnType("char(36)")
                         .HasColumnName("doctor_id");
+
+                    b.Property<Guid>("ID")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("UnityID", "DoctorID");
 
@@ -290,8 +285,7 @@ namespace CentroClinico.Infra.Data.Migrations
                         .HasColumnName("active");
 
                     b.Property<DateTime>("BirthDay")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("birth_day");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -340,12 +334,6 @@ namespace CentroClinico.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CentroClinico.Domain.Entities.Speciality", "Speciality")
-                        .WithMany("Appointments")
-                        .HasForeignKey("SpecialityID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CentroClinico.Domain.Entities.Unity", "Unity")
                         .WithMany("Appointments")
                         .HasForeignKey("UnityID")
@@ -355,8 +343,6 @@ namespace CentroClinico.Infra.Data.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Doctor");
-
-                    b.Navigation("Speciality");
 
                     b.Navigation("Unity");
                 });
@@ -452,8 +438,6 @@ namespace CentroClinico.Infra.Data.Migrations
 
             modelBuilder.Entity("CentroClinico.Domain.Entities.Speciality", b =>
                 {
-                    b.Navigation("Appointments");
-
                     b.Navigation("Doctors");
                 });
 

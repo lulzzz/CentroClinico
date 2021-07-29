@@ -4,6 +4,7 @@ using CentroClinico.UI.MVC.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,18 @@ namespace CentroClinico.UI.MVC.Controllers
 
     public IActionResult Index()
     {
+      List<SelectListItem> specialities = Context.Specialities
+        .OrderBy(x => x.Name)
+        .ToList()
+        .Select(
+          x => new SelectListItem
+          {
+            Text = x.Name,
+            Value = x.ID.ToString()
+        })
+        .ToList();
+
+      ViewBag.Specialities = specialities;
       return View();
     }
 

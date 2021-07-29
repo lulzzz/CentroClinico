@@ -12,6 +12,9 @@ namespace CentroClinico.Domain.Entities
     public Unity Unity { get; set; }
     public Guid CustomerID { get; set; }
     public Customer Customer { get; set; }
+    public Guid SpecialityID   { get; set; }
+    public Speciality Speciality { get; set; }
+    public bool Private { get; set; }
 
   }
 }

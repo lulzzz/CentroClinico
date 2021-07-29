@@ -12,7 +12,7 @@ namespace CentroClinico.Infra.Data.EF
     {
       if (!optionsBuilder.IsConfigured)
       {
-        string mySQLConnectionStr = "Server=banco_mysql;Port=3306;Database=centro_clinico;Uid=root;Pwd=X369408";
+        string mySQLConnectionStr = "Server=localhost;Port=3306;Database=centro_clinico;Uid=root;Pwd=X369408";
         optionsBuilder.UseMySql(mySQLConnectionStr, ServerVersion.AutoDetect(mySQLConnectionStr));
       }
     }
@@ -33,12 +33,12 @@ namespace CentroClinico.Infra.Data.EF
 
     public DbSet<User> Users { get; set; }
     public DbSet<Unity> Unities { get; set; }
-    public DbSet<Speciality> Specialties { get; set; }
+    public DbSet<Speciality> Specialities { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<Employee> Employeies { get; set; }
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<DoctorUnity> DoctorUnities { get; set; }
-    public DbSet<DoctorSpeciality> DoctorSpecialties { get; set; }
+    public DbSet<DoctorSpeciality> DoctorSpecialities { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
   }

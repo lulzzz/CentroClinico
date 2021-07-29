@@ -20,17 +20,32 @@
 </div>
 <div id="book" class="col-md-4 content_middle wow flipInY" data-wow-duration="1.5s" data-wow-delay="0.3s">
   <h3>Book An Appointment</h3>
-  <form action="#" method="post">
-    <input type="text" name="Name" value="Name" onfocus="this.value='';" onblur="if(this.value=='') {this.value='Name';}" required="">
-    <input type="text" name="Email" value="Email" onfocus="this.value='';" onblur="if(this.value=='') {this.value='Email';}" required="">
-    <input class="date" name="19/10/2016" id="datepicker" type="text" value="19/10/2016" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '19/10/2016';}" required="">
-    <select id="country" onchange="change_country(this.value)" class="frm-field required sect">
-      <option value="null">Select Department</option>
-      <option value="null">Health Care</option>
-      <option value="null">Body Checkup</option>
-      <option value="null">Out Patient</option>
-      <option value="null">Surgery</option>
+  <script type="text/javascript">
+    function verifyAppointmentType() {
+      document.getElementById("frmAppointment").style.display = "none";
+      let selected = parseInt(document.getElementById("Appointment.Private").value);
+      if (( selected === 1 ) || ( selected === 0 )) {
+        document.getElementById("frmAppointment").style.display = "block";
+      }
+    }
+  </script>
+  <form asp-action="Scheduling" asp-controller="Appointments" method="post">
+    <select name="Appointment.Private" id="Appointment.Private" onchange="verifyAppointmentType()">
+      <option value="">-- Select your appointment type --</option>
+      <option value="1">Private Appointment</option>
+      <option value="0">Insurance Appointment</option>
     </select>
-    <input type="submit" value="Book Now">
+
+    <div id="frmAppointment" style="display: none;">
+      <input type="text" placeholder="Name" name="Appointment.Customer.User.Name" id="Appointment.Customer.User.Name" required>
+      <input type="text" placeholder="E-mail" name="Appointment.Customer.User.Email" id="Appointment.Customer.User.Email" required>
+      <input type="password" placeholder="Password" name="Appointment.Customer.User.Password" id="Appointment.Customer.User.Password"/>
+      <input type="text" placeholder="Phone" name="Appointment.Customer.User.Phone" id="Appointment.Customer.User.Phone" required>
+      <input class="date" placeholder="Birthday" name="Appointment.Customer.User.BirthDay" id="datepicker" type="text" required>
+      <input type="text" placeholder="Appointment date and <time></time>" name="Appointment.DateTime" id="Appointment.DateTime" required>
+      <select asp-items="ViewBag.Specialities" id="Appointment.SpecialityID" name="Appointment.SpecialityID" class="frm-field required sect">
+      </select>
+      <input type="submit" value="Book Now">
+    </div>
   </form>
 </div>

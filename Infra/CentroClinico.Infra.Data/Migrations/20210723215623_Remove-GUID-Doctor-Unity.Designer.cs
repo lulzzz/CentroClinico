@@ -3,14 +3,16 @@ using System;
 using CentroClinico.Infra.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CentroClinico.Infra.Data.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20210723215623_Remove-GUID-Doctor-Unity")]
+    partial class RemoveGUIDDoctorUnity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,10 +37,6 @@ namespace CentroClinico.Infra.Data.Migrations
                     b.Property<Guid>("DoctorID")
                         .HasColumnType("char(36)")
                         .HasColumnName("doctor_id");
-
-                    b.Property<bool>("Private")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("private");
 
                     b.Property<Guid>("SpecialityID")
                         .HasColumnType("char(36)")
